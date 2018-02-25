@@ -29,7 +29,7 @@ Login-AzureRmAccount -SubscriptionId $SubscriptionId
 #TODO: Use the line below instead of Login above, once you're authenticated.
 #Select-AzureRmSubscription -SubscriptionId $SubscriptionId | Out-Null
 
-"Creating new resource group for the demo lab..."
+"Creating new resource group for the Sog lab..."
 New-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation
 
 "Start deploying the demo lab using the ARM templates..."

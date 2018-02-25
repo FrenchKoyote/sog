@@ -196,9 +196,9 @@
     "labVirtualNetworkName": "[concat('SOG-VN-', parameters('newLabName'))]",
     "labSubnetName": "[concat(variables('labVirtualNetworkName'), 'Subnet')]",
     "labVirtualNetworkId": "[resourceId('Microsoft.DevTestLab/labs/virtualNetworks', variables('LabName'), variables('labVirtualNetworkName'))]",
-    "devTemplateResourceName": "[concat(variables('LabName'), '-', parameters('devBoxTemplateName'))]",
-    "goldenImageTemplateResourceName": "[concat(variables('LabName'), '-', parameters('goldenImageTemplateName'))]",
-    "testTemplateResourceName": "[concat(variables('LabName'), '-', parameters('testBoxTemplateName'))]",
+    "devTemplateResourceName": "[concat(variables('LabName'), '/', parameters('devBoxTemplateName'))]",
+    "goldenImageTemplateResourceName": "[concat(variables('LabName'), '/', parameters('goldenImageTemplateName'))]",
+    "testTemplateResourceName": "[concat(variables('LabName'), '/', parameters('testBoxTemplateName'))]",
     "devVmTemplateId": "[resourceId('Microsoft.DevTestLab/labs/customImages', variables('LabName'), parameters('devBoxTemplateName'))]",
     "testVmTemplateId": "[resourceId('Microsoft.DevTestLab/labs/customImages', variables('LabName'), parameters('testBoxTemplateName'))]",
     "goldenImageTemplateId": "[resourceId('Microsoft.DevTestLab/labs/customImages', variables('LabName'), parameters('goldenImageTemplateName'))]"
@@ -301,7 +301,7 @@
     {
       "apiVersion": "2017-04-26-preview",
       "type": "Microsoft.DevTestLab/labs/virtualmachines",
-      "name": "[concat(parameters('newLabName'), '/', parameters('pilotVMName'))]",
+      "name": "[concat(variables('LabName'), '/', parameters('pilotVMName'))]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('labVirtualNetworkId')]"
@@ -329,11 +329,11 @@
       "name": "[variables('devTemplateResourceName')]",
       "type": "Microsoft.DevTestLab/labs/customimages",
       "dependsOn": [
-        "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('pilotVMName'))]"
+        "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('pilotVMName'))]"
       ],
       "properties": {
         "vm": {
-          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('pilotVMName'))]",
+          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('pilotVMName'))]",
           "windowsOsInfo": {
             "windowsOsState": "NonSysprepped"
           }
@@ -346,11 +346,11 @@
       "name": "[variables('testTemplateResourceName')]",
       "type": "Microsoft.DevTestLab/labs/customimages",
       "dependsOn": [
-        "[resourceId('Microsoft.DevTestLab/labs/customimages', parameters('newLabName'), parameters('devBoxTemplateName'))]"
+        "[resourceId('Microsoft.DevTestLab/labs/customimages', variables('LabName'), parameters('devBoxTemplateName'))]"
       ],
       "properties": {
         "vm": {
-          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('pilotVMName'))]",
+          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('pilotVMName'))]",
           "windowsOsInfo": {
             "windowsOsState": "NonSysprepped"
           }
@@ -363,11 +363,11 @@
       "name": "[variables('goldenImageTemplateResourceName')]",
       "type": "Microsoft.DevTestLab/labs/customimages",
       "dependsOn": [
-        "[resourceId('Microsoft.DevTestLab/labs/customimages', parameters('newLabName'), parameters('testBoxTemplateName'))]"
+        "[resourceId('Microsoft.DevTestLab/labs/customimages', variables('LabName'), parameters('testBoxTemplateName'))]"
       ],
       "properties": {
         "vm": {
-          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('pilotVMName'))]",
+          "sourceVmId": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('pilotVMName'))]",
           "windowsOsInfo": {
             "windowsOsState": "NonSysprepped"
           }
@@ -378,7 +378,7 @@
     {
       "apiVersion": "2017-04-26-preview",
       "type": "Microsoft.DevTestLab/labs/virtualmachines",
-      "name": "[concat(parameters('newLabName'), '/', parameters('devBoxVMName'))]",
+      "name": "[concat(variables('LabName'), '/', parameters('devBoxVMName'))]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('devVmTemplateId')]",
@@ -399,7 +399,7 @@
     {
       "apiVersion": "2017-04-26-preview",
       "type": "Microsoft.DevTestLab/labs/virtualmachines",
-      "name": "[concat(parameters('newLabName'), '/', parameters('testBoxVMName'))]",
+      "name": "[concat(variables('LabName'), '/', parameters('testBoxVMName'))]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('testVmTemplateId')]",
@@ -420,7 +420,7 @@
     {
       "apiVersion": "2017-04-26-preview",
       "type": "Microsoft.DevTestLab/labs/virtualmachines",
-      "name": "[concat(parameters('newLabName'), '/', parameters('goldenImageVMName'))]",
+      "name": "[concat(variables('LabName'), '/', parameters('goldenImageVMName'))]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('goldenImageTemplateId')]",
@@ -442,11 +442,11 @@
   "outputs": {
     "labId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.DevTestLab/labs', parameters('newLabName'))]"
+      "value": "[resourceId('Microsoft.DevTestLab/labs', variables('LabName'))]"
     },
     "pilotVmId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('pilotVMName'))]"
+      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('pilotVMName'))]"
     },
     "devVmTemplateId": {
       "type": "string",
@@ -462,15 +462,15 @@
     },
     "devVmId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('devBoxVMName'))]"
+      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('devBoxVMName'))]"
     },
     "testVmId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('testBoxVMName'))]"
+      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('testBoxVMName'))]"
     },
     "goldenImageVmId": {
       "type": "string",
-      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', parameters('newLabName'), parameters('goldenImageVMName'))]"
+      "value": "[resourceId('Microsoft.DevTestLab/labs/virtualMachines', variables('LabName'), parameters('goldenImageVMName'))]"
     }
   }
 }

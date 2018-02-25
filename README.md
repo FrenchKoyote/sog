@@ -15,12 +15,14 @@
 
 ###### 5 - Changes all necessary variables into 'azuredeploy.parameter.json' before execute script :
 
-* __newLabName__ : The name of the new lab instance to be created.
+* **newLabName** : The name of the new lab instance to be created.
 * **artifactRepoUri** : Set 'artifact repository' : the Git clone URI.
 * **artifactRepoFolder** : Set 'artifact repository' : the target folder in the repo.
 * **artifactRepoBranch** : Set 'artifact repository' : the target branch in the repo.
 * **artifactRepoDisplayName** : Set 'artifact repository' : the display name of the repo.
-* **artifactRepoSecurityToken** : Set 'artifact repository' : the personal access token of the repo. On GitHub, you can generate a new one  > Avatar > Settings > Developer settings > Personal access token  
+* **artifactRepoSecurityToken** : Set 'artifact repository' : the personal access token of the repo. 
+
+**TIPS** : On GitHub, you can generate a new one  > Avatar > Settings > Developer settings > Personal access token  
 	
 ###### 6 - Then run the following commands:
 
@@ -28,8 +30,10 @@
 
    e.g.
 
-	PS C:\PSScripts>.\ProvisionSogetrelDevTestLab.ps1 -SubscriptionId "12345678-1234-5678-1234-123456789000" -ResourceGroupName "SOG-RG-WestEurope-DevTestLab" -ResourceGroupLocation "West Europe"
+	PS C:\PSScripts>.\ProvisionSogetrelDevTestLab.ps1 -SubscriptionId "6f2c9094-f241-4528-800d-bfde589f02cd" -ResourceGroupName "SOG-RG-WestEurope-DevTestLab" -ResourceGroupLocation "West Europe"
 
+**TIPS** : To know your SubscriptionId launch the following command into PS cmd : Login-AzureRmAccount. You will see your SubscriptionId :)
+	
 ===============================================================================
 
 About the resources created in the Demo Lab:
