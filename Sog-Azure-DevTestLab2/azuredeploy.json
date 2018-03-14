@@ -46,7 +46,7 @@
     "sqlPublicIP": "[concat('fab', 'SqlPip')]",
     "sqlPublicIPRef": "[resourceId('Microsoft.Network/publicIPAddresses', variables('sqlPublicIP'))]",
     "sqlImagePublisher": "MicrosoftSQLServer",
-    "sqlImageOffer": "SQL2014-WS2012R2",
+    "sqlImageOffer": "SQL2014SP2-WS2012R2",
     "sqlImageSku": "Standard",
     "webSrvName": "[concat('fab', 'webSrv')]",
     "webSrvVMSize": "['Standard_DS2_v2']",
