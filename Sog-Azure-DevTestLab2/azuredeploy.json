@@ -30,7 +30,7 @@
     "apiVersion": "2015-06-15",
     "storageName": "[concat('fab', 'stg', uniqueString(resourceGroup().id))]",
     "vhdContainer": "vhds",
-    "virtualNetworkName": "[concat('CONTOSO', 'Vnet')]",
+    "virtualNetworkName": "[concat('SOG', 'Vnet')]",
     "addressPrefix": "10.0.0.0/16",
     "feSubnetPrefix": "10.0.0.0/24",
     "dbSubnetPrefix": "10.0.2.0/24",
@@ -38,8 +38,8 @@
     "dbNSGName": "dbNsg",
     "sqlSrvDBName": "[concat('fab', 'sqlSrv14')]",
     "sqlVmSize": "['Standard_DS3_v2']",
-    "sqlSrvDBOsDiskName": "[concat('CONTOSO', 'DBSrvOS')]",
-    "sqlSrvDBDataDiskName": "[concat('CONTOSO', 'DBSrvData')]",
+    "sqlSrvDBOsDiskName": "[concat('SOG', 'DBSrvOS')]",
+    "sqlSrvDBDataDiskName": "[concat('SOG', 'DBSrvData')]",
     "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "sqlSrvDBNicName": "[concat(variables('sqlSrvDBName'), 'Nic')]",
     "sqlSvrDBSubnetRef": "[concat(variables('vnetId'), '/subnets/', 'DBSubnetName')]",
@@ -274,7 +274,7 @@
       }
     },
     {
-      "name": "[concat('CONTOSO', 'sqlSrv14')]",
+      "name": "[concat('SOG', 'sqlSrv14')]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[resourceGroup().location]",
       "apiVersion": "[variables('apiVersion')]",

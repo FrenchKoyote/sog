@@ -1,4 +1,4 @@
-# Azure DevTest Lab Provisonning
+# SOG Azure DevTest Lab Provisonning
 
 ### Quick start instructions
 
@@ -26,11 +26,11 @@
 	
 ###### 6 - Then run the following commands:
 
-	.\ProvisionSogetrelDevTestLab.ps1 -SubscriptionId "<Azure subscription ID where the lab will be created>" -ResourceGroupName "<name for the new resource group where the lab will be created>" -ResourceGroupLocation "<location for the resource group to be created. e.g. West US>"
+	.\ProvisionSogDevTestLab.ps1 -SubscriptionId "<Azure subscription ID where the lab will be created>" -ResourceGroupName "<name for the new resource group where the lab will be created>" -ResourceGroupLocation "<location for the resource group to be created. e.g. West US>"
 
    e.g.
 
-	PS C:\PSScripts>.\ProvisionSogetrelDevTestLab.ps1 -SubscriptionId "6f2c9094-f241-4528-800d-bfde589f02cd" -ResourceGroupName "SOG-RG-WestEurope-DevTestLab" -ResourceGroupLocation "West Europe"
+	PS C:\PSScripts>.\ProvisionSogDevTestLab.ps1 -SubscriptionId "6f2c9094-f241-4528-800d-bfde589f02cd" -ResourceGroupName "SOG-RG-WestEurope-DevTestLab" -ResourceGroupLocation "West Europe"
 
 **TIPS** : To know your SubscriptionId launch the following command into PS cmd : Login-AzureRmAccount. You will see your SubscriptionId :)
 	
